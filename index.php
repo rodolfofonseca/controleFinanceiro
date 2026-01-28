@@ -1,8 +1,5 @@
 <?php
 require_once 'Classes/bancoDeDados.php';
-require_once 'modelos/Usuario.php';
-require_once 'modelos/Sistema.php';
-require_once 'modelos/Empresa.php';
 
 /**
  * Rota responsável por capturar as informações de login do usuário, e caso o banco de dados do usuário não possui nenhuma empresa cadastrada redirecionar o usuário para o formulário onde o mesmo irá realizar o cadastro de sua empresa.

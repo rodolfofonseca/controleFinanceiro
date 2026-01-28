@@ -3,28 +3,15 @@ require_once 'modelos/Notificacoes.php';
 
 session_start();
 date_default_timezone_set('America/Sao_Paulo');
-if ((!isset($_SESSION['login']) == true) && (!isset($_SESSION['senha']) == true)) {
-    header('location:index.php');
-}
 
 $objeto_notificacao = new Notificacoes();
-
-//CONSTANTES UTILIZADAS EM TODO O SISTEMA
-define('CODIGO_USUARIO', convert_id($_SESSION['id_usuario']));
-define('CODIGO_SISTEMA', convert_id($_SESSION['id_sistema']));
-define('CODIGO_EMPRESA', convert_id($_SESSION['id_empresa']));
-define('TIPO_USUARIO', (string) $_SESSION['tipo_usuario']);
-define('NOME_USUARIO', (string) $_SESSION['login']);
-define('VERSAO_SISTEMA', (string) $_SESSION['versao_sistema']);
-
-// $quantidade_notificacao = (int) $objeto_notificacao->contar_notificacoes((array) ['id_usuario' => (int) CODIGO_USUARIO]);
-$quantidade_notificacao = (int) 0;
 $notificacoes = (array) [];
 $retorno = (bool) false;
 
-if($quantidade_notificacao != 0){
-    $notificacoes = (array) $objeto_notificacao->pesquisar_todos((array) ['filtro' => (array) ['id_usuario', '===', (int) CODIGO_USUARIO], 'ordenacao' => (array) ['id_notificacao' => (bool) false], 'limite' => (int) 0]);
-}
+define('NOME_USUARIO', "RODOLFO");
+define('TIPO_USUARIO', "ADMINISTRADOR");
+define('VERSAO_SISTEMA', '0.0');
+$quantidade_notificacao = (int) 0;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -175,50 +162,20 @@ if($quantidade_notificacao != 0){
                     <ul id="sidebarnav">
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="dashboard.php" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="list-divider"></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="sidebar" class="feather-icon"></i><span class="hide-menu">Documentos</span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="sidebar" class="feather-icon"></i><span class="hide-menu">Cadastros</span></a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="documentos.php" class="sidebar-link"><span class="hide-menu">Visualizar Documentos</span></a>
+                                <li class="sidebar-item">
+                                    <a href="contas.php" class="sidebar-link">
+                                        <span class="hide-menu">Contas</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="lancamentos.php" class="sidebar-link">
+                                        <span class="hide-menu">Movimentação</span>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
-
-                        <?php
-                        if (TIPO_USUARIO == 'ADMINISTRADOR') {
-                        ?>
-
-                            <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span class="hide-menu">Cadastros</span></a>
-                                <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                    <li class="sidebar-item"><a href="organizacao.php" class="sidebar-link"><span class="hide-menu">Organização</span></a></li>
-                                    <li class="sidebar-item"><a href="armario.php" class="sidebar-link"><span class="hide-menu">Armário</span></a></li>
-                                    <li class="sidebar-item"><a href="prateleira.php" class="sidebar-link"><span class="hide-menu">Prateleira</span></a></li>
-                                    <li class="sidebar-item"><a href="caixa.php" class="sidebar-link"><span class="hide-menu">caixa</span></a></li>
-                                    <!-- <li class="sidebar-item"><a href="contas_bancarias.php" class="sidebar-link"><span class="hide-menu">Contas Bancárias</span></a></li>
-                                    <li class="sidebar-item"><a href="tipo_despesa.php" class="sidebar-link"><span class="hide-menu">Tipo Despesa / tipo Contas</span></a></li> -->
-                                </ul>
-                            </li>
-                            <li class="sidebar-item"><a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Log Sistema</span></a>
-                                <ul aria-expanded="false" class="collapse first-level base-level-line">
-                                    <li class="sidebar-item"><a href="log_sistema.php" class="sidebar-link"><span class="hide-menu">Visualizar Log do Sistema</span></a></li>
-                                </ul>
-                            </li>
-                            <!-- <li class="sidebar-item"><a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="book-open" class="feather-icon"></i><span class="hide-menu">Contas</span></a>
-                                <ul aria-expanded="false" class="collapse first-level base-level-line">
-                                    <li class="sidebar-item"><a href="contas.php" class="sidebar-link"><span class="hide-menu">Contas</span></a></li>
-                                </ul>
-                            </li>
-                            <li class="sidebar-item"><a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="airplay" class="feather-icon"></i><span class="hide-menu">Lançamentos</span></a>
-                                <ul aria-expanded="false" class="collapse first-level base-level-line">
-                                    <li class="sidebar-item"><a href="lancamentos.php" class="sidebar-link"><span class="hide-menu">Corrigir Lançamentos</span></a></li>
-                                </ul>
-                            <li class="sidebar-item"><a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="book-open" class="feather-icon"></i><span class="hide-menu">Relatórios</span></a>
-                                <ul aria-expanded="false" class="collapse first-level base-level-line">
-                                    <li class="sidebar-item"><a href="relatorios_contabeis.php" class="sidebar-link"><span class="hide-menu">Relatórios Contábeis</span></a></li>
-                                </ul>
-                            </li> -->
-                            </li>
-                        <?php
-                        }
-                        ?>
                     </ul>
                 </nav>
             </div>

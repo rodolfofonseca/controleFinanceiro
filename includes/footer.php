@@ -22,7 +22,7 @@ $ano_atual = date('Y');
             CNPJ nª: 57.575.467/0001-87 / Rua José da Ponte. 96. Big Plazza, Jales-SP CEP: 15700-856 Uma empresa do grupo RAVF
         </div>
         <div class="col-4">
-            Sistema Gerenciador de Documentos Versão: <?php echo VERSAO_SISTEMA; ?>
+            Sistema Gerenciador de Documentos Versão: 0.0
         </div>
     </div>
 </footer>
