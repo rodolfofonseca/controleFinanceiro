@@ -1,7 +1,7 @@
 <?php
 //Empresa aberta em 06/10/2024
-//Sistema lançado em 22/01/2025
-$ano_lancamento_sistema = 2025;
+//Sistema lançado em 31/01/2026
+$ano_lancamento_sistema = 2026;
 $ano_atual = date('Y');
 ?>
 
@@ -9,7 +9,7 @@ $ano_atual = date('Y');
     <div class="row">
         <div class="col-8">
             <?php
-            if($ano_atual == 2025){
+            if($ano_atual == 2026){
                 ?>
                     Copyright©️ <?php echo $ano_atual; ?> RAVF Desenvolvimento de Sistemas LTDA.
                 <?php
@@ -19,10 +19,10 @@ $ano_atual = date('Y');
                 <?php
             }
             ?>
-            CNPJ nª: 57.575.467/0001-87 / Rua José da Ponte. 96. Big Plazza, Jales-SP CEP: 15700-856 Uma empresa do grupo RAVF
+            CNPJ nº: 57.575.467/0001-87 / Rua José da Ponte. 96. Big Plazza, Jales-SP CEP: 15700-856 Uma empresa do grupo RAVF
         </div>
         <div class="col-4">
-            Sistema Gerenciador de Documentos Versão: 0.0
+            Sistema Gerenciador Financeiro Versão: <?php echo VERSAO_SISTEMA; ?>;
         </div>
     </div>
 </footer>

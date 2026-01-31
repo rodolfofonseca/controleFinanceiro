@@ -1,16 +1,19 @@
 <?php
 require_once 'modelos/Notificacoes.php';
+require_once 'modelos/Sistema.php';
 
 session_start();
 date_default_timezone_set('America/Sao_Paulo');
 
 $objeto_notificacao = new Notificacoes();
+$objeto_sistema = new Sistema();
+
 $notificacoes = (array) [];
 $retorno = (bool) false;
 
 define('NOME_USUARIO', "RODOLFO");
 define('TIPO_USUARIO', "ADMINISTRADOR");
-define('VERSAO_SISTEMA', '0.0');
+define('VERSAO_SISTEMA', $objeto_sistema->pesquisar_versao_sistema());
 $quantidade_notificacao = (int) 0;
 ?>
 <!DOCTYPE html>
@@ -20,10 +23,10 @@ $quantidade_notificacao = (int) 0;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sistema de Controle de documentos físicos e digitais">
+    <meta name="description" content="Sistema de Controle Financeiro">
     <meta name="author" content="Ravf">
     <link rel="icon" type="image/png" sizes="16x16" href="imagens/icone_sistema.ico">
-    <title>Gerenciador de Documentos</title>
+    <title>Gerenciador Financeiro</title>
     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="dist/css/style.min.css" rel="stylesheet">
@@ -66,10 +69,6 @@ $quantidade_notificacao = (int) 0;
                                 <img src="imagens/nome_sistema.jpg" alt="homepage" class="dark-logo" />
                                 <img src="imagens/nome_sistema.jpg" alt="homepage" class="light-logo" />
                             </b>
-                            <!-- <span class="logo-text">
-                                <img src="imagens/nome_sistema.jpg" alt="homepage" class="dark-logo" />
-                                <img src="imagens/nome_sistema.jpg" class="light-logo" alt="homepage" />
-                            </span> -->
                         </a>
                     </div>
                     <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
@@ -134,16 +133,14 @@ $quantidade_notificacao = (int) 0;
                                     <i data-feather="chevron-down" class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="usuario.php?rota=alterar_informacoes_usuario_comum"> <i data-feather="user" class="svg-icon mr-2 ml-1"></i>Meu Perfil</a>
-                                <a class="dropdown-item" href="#"> <i data-feather="credit-card" class="svg-icon mr-2 ml-1"> </i>caixa</a>
+                                <!-- <a class="dropdown-item" href="usuario.php?rota=alterar_informacoes_usuario_comum"> <i data-feather="user" class="svg-icon mr-2 ml-1"></i>Meu Perfil</a> -->
+                                <!-- <a class="dropdown-item" href="#"> <i data-feather="credit-card" class="svg-icon mr-2 ml-1"> </i>caixa</a> -->
                                 <a class="dropdown-item" href="#"><i data-feather="mail" class="svg-icon mr-2 ml-1"></i>Mensagens</a>
                                 <?php
                                     if(TIPO_USUARIO == 'ADMINISTRADOR'){
                                         ?>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="usuario.php"><i data-feather="settings" class="svg-icon mr-2 ml-1"></i>Configurações de Usuários</a>
-                                            <a class="dropdown-item" href="sistema.php"><i data-feather="settings" class="svg-icon mr-2 ml-1"></i>Configurações do Sistema</a>
-                                            <a class="dropdown-item" href="empresa.php"><i data-feather="settings" class="svg-icon mr-2 ml-1"></i>Configurações da Empresa</a>
                                         <?php
                                     }
                                 ?>
@@ -170,7 +167,7 @@ $quantidade_notificacao = (int) 0;
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="lancamentos.php" class="sidebar-link">
+                                    <a href="movimentacao.php" class="sidebar-link">
                                         <span class="hide-menu">Movimentação</span>
                                     </a>
                                 </li>
